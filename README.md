@@ -1,1 +1,1 @@
-Templib - Basic PHP library.
+Templib - Simple PHP templating library.
