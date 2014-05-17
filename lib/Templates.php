@@ -1,24 +1,21 @@
 <?php
 class Templates {
-  public function display($template, $data) {
+  public function display($template, $data, $include) {
     $fc = file_get_contents($template);
-    $fc = $this->replaces($fc, $data);
+    $fc = Common::ReplaceVariables($fc, $data);
+	foreach($include as $inc) {
+		$fc = str_replace($inc, URLFixer::GetDisplayURL($inc, $data), $fc);
+	}
 	echo $fc;
     return true;
   }
-  public function html($template, $data) {
+  public function html($template, $data, $include) {
     $fc = file_get_contents($template);
-    $fc = $this->replaces($fc, $data);
-	return $fc;
-  }
-  private function replaces($fc, $data) {
-	$return = $fc;
-	$d = array_keys($data);
-	for($i = 0; $i < count($d); $i++) {
-		$d[$i] = "{{".(array_keys($data)[$i])."}}";
+    $fc = Common::ReplacesVariables($fc, $data);
+	foreach($include as $inc) {
+		$fc = str_replace($inc, URLFixer::GetDisplayURL($inc, $data), $fc);
 	}
-	$return = str_replace($d, array_values($data), $return);
-	return $return;
+	return $fc;
   }
 }
 ?>
