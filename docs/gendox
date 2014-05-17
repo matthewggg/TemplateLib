@@ -1,0 +1,12 @@
+#!/bin/bash
+echo Invoking daux.io
+cd ~/daux.io
+php index.php generate
+echo Copying
+cp -r ./ /cygdrive/c/xampp/public_html/uabuilder/docs 
+echo Copied
+cd /cygdrive/c/xampp/public_html/uabuilder
+git add ./
+git commit -a -m "Update Configuration | $1"
+git push origin
+echo Documentation and repo updated.
