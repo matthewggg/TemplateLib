@@ -8,7 +8,7 @@ if(isset($_GET['viewmagic'])) {
 }
 class URLFixer {
 	public static function GetDisplayURL($url, $data) {
-		$url = "http".(!empty($_SERVER['HTTPS'])?"s":"")."://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']."?viewmagic=".urlencode($url)."&datamagic=".urlencode(serialize($data));
+		$url = basename($_SERVER["SCRIPT_FILENAME"])."?viewmagic=".urlencode($url)."&datamagic=".urlencode(serialize($data));
 		return $url;
 	}
 }
